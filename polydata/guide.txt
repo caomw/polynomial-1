@@ -1,0 +1,5 @@
+tmp = x(E(i,1))*Q(:,E(i,1)) - x(E(i,2))*Q(:,E(i,2));
+f(i) = tmp'*tmp - E(i,3)^2;
+    
+dfdx = 2*(2*a*(a*x - b*y) + 2*c*(c*x - d*y) + 2*e*(e*x - f*y))*((a*x - b*y)^2 + (c*x - d*y)^2 + (e*x - f*y)^2 - g^2);
+dfdy = -2*(2*b*(a*x - b*y) + 2*d*(c*x - d*y) + 2*f*(e*x - f*y))*((a*x - b*y)^2 + (c*x - d*y)^2 + (e*x - f*y)^2 - g^2);

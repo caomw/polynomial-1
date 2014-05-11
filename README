@@ -1,0 +1,15 @@
+Author: Mathieu Salzmann, NICTA
+
+This code is an implementation of the DD-Poly and ADMM-Poly algorithms described in the CVPR 2013 paper entitled "Continuous Inference in Graphical Models with Polynomial Energies". In particular, the example provided here corresponds to the non-rigid 3D reconstruction example described in Section 4.2 of the paper. Data corresponding to 100 random deformations of a 3x3 square mesh is also provided with the code. The more general purpose of this code is to minimize a polynomial energy that decomposes into local energies that only depend on a small number of overlapping variables. Variables in the code generally follow the notation in the paper.
+
+INSTALLATION:
+
+1) Download the homotopy continuation software HOM4PS-2.0 from http://www.math.nsysu.edu.tw/~leetsung/works/HOM4PS_soft.htm
+
+2) Replace the file hom4ps2 in the downloaded distribution with the one provided with this code.
+
+3) Replace the folder names on lines 27 and 56 of main.m with the appropriate paths.
+
+4) Execute main.m from Matlab.
+
+This code can be used freely for research and education purposes. Enquiries about possible commercial usage should be directed to the author.
