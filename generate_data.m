@@ -50,17 +50,6 @@ uv = uv + noise*randn(size(uv));
 % Compute the groups used for dual decomposition
 [G,Eg,W] = compute_groups(3,3,E);
 
-%% Create useful folders and copy files
-
-basehom4ps = 'HOM4PS2/';
-
-for i=1:size(G,1)
-    tmp = sprintf('%d',i);
-    mkdir(tmp);
-    copyfile([basehom4ps 'hom4ps2'],tmp);
-    tmp = sprintf('%d/bin',i);
-    copyfile([basehom4ps 'bin'],tmp);
-end
 
 %% Reconstruct each of the NDefs meshes
 
@@ -69,6 +58,8 @@ bname = 'edge_length_error_global'; % Energy function for the whole mesh
 plotname = 'compute_and_plot_mesh_los'; % Plot function name
 
 % for def=1:NDefs;
+error_dc = zeros(1, 100);
+error_cccp = zeros(1, 100);
 
 for def=1:100;
 
@@ -76,11 +67,31 @@ for def=1:100;
 
     % Ground-truth mesh in camera coordinates
     ygt = ext*[reshape(Ygt(def,:),3,[]);ones(1,nPts)];
-        
+    ydc = y_dc{def};
+    ycccp = repmat(y_cccp{def},3,1).*Q;
     % Run DD-Poly or ADMM-Poly
-    f = fopen(['./polydata/','model',num2str(def),'.txt'], 'wt+');
+    % f = fopen(['./polydata/','model',num2str(def),'.txt'], 'wt+');
     
-    fprintf(f, '%6.4f\n', Q);
-    fprintf(f, '%6.4f\n', ygt);
-    fclose(f);
+    % fprintf(f, '%6.4f\n', Q);
+    % fprintf(f, '%6.4f\n', ygt);
+    % fclose(f);
+    err_dc(def) = mean(sqrt(sum((ydc-ygt).^2)));
+    err_cccp(def) = mean(sqrt(sum((ycccp-ygt).^2)));
+    fprintf('Frame %d: DC reconstr err = %2.4f, CCCP reconstr err = %2.4f\n',def,err_dc(def),err_cccp(def));
+%     if(finaldisplay)
+%         figure(1);
+%         clf;
+%         hold on;
+%         Mesh.coords = ydc';
+%         PlotMesh(Mesh,'-.r',1);
+%         Mesh.coords = ycccp';
+%         PlotMesh(Mesh,'-g',1);
+%         Mesh.coords = ygt';
+%         PlotMesh(Mesh,'b',1);
+%         hold off;
+%         view(-25,25);
+%         % fp = fillPage(gcf, 'margins', [0 0 0 0]);
+%         print(gcf, '-dpdf', '-r300', ['./plot/figure',num2str(def),'.pdf']);
+%     end
+    
 end

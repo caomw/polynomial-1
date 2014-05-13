@@ -115,7 +115,10 @@ for def=1:100;
     
     name = sprintf('results/res_%d_noise_%d_admm_%d_rule_%d.mat',def,noise,rho1,grad_rule);
     save(name,'y','primal','dual','errs','runtime');
-    
+    f = fopen(['./polydata/','model',num2str(def),'.txt'], 'wt+');
+    fprintf(f, '%6.4f\n', Q);
+    fprintf(f, '%6.4f\n', ygt);
+    fclose(f);    
 end
 
 % Uncomment if running on several cores
