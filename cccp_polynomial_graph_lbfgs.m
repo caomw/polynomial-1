@@ -9,8 +9,12 @@ tic;
 nodes_num = graph.nodes_num;
 edges_num = graph.edges_num;
 % nodes_val = rand(1, nodes_num);
-nodes_val = reshape(vase+rand(size(vase)), 1, nodes_num);
+% nodes_val = reshape(vase+rand(size(vase)), 1, nodes_num);
 % nodes_val(1) = 0;
+k = ceil((size(vase, 1)+1) / 2);
+[x, y] = meshgrid(1:size(vase, 1), 1:size(vase, 1));
+nodes_val = (k - sqrt((x-(size(vase, 1)+1) / 2).^2+(y-(size(vase, 1)+1)/2).^2))/k*2;
+
 nodes_old = randn(1, nodes_num);
 gvex_sum = graph.gvex_sum;
 gcave_sum = graph.gcave_sum;

@@ -22,7 +22,7 @@ imshow(im2);
 [imHeight, imWidth] = size(im);
 lambda = 1e-6;
 syms x y z c;
-fvex = c^4*(5/4*(x-y)^4+5/4*(x-z)^4+2*(x-y)^2*(x-z)^2+2*(x-y)^2+2*(x-z)^2)+(c^2-1)^2 + lambda*(x^2+y^2+z^2);
+fvex = c^4*(5/4*(x-y)^4+5/4*(x-z)^4+2*(x-y)^2*(x-z)^2+2*(x-y)^2+2*(x-z)^2)+(c^2-1)^2 + lambda*((x-2*y+z)^2);
 fcave = -1/4*c^4*((x-y)^4+(x-z)^4)-2*c^2*((x-y)^2+(x-z)^2);
 grid_size = imHeight;
 vartable = [x y z c];

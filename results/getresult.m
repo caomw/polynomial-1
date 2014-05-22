@@ -21,7 +21,7 @@ y_cccp = cell(1, 100);
 mean_energy_cccp = 0;
 mean_time_cccp = 0;
 for i = 1 : 100
-    fileID = fopen(['./random2/outputCCCP', num2str(i),'.txt'],'r');
+    fileID = fopen(['./random1/outputCCCP', num2str(i),'.txt'],'r');
     formatSpec = '%f ';
     sizeA = [1 Inf];
     datalist = fscanf(fileID,formatSpec,sizeA);
@@ -30,7 +30,7 @@ for i = 1 : 100
     time_cccp{i} = datalist(2,:);
     energy_cccp{i} = datalist(1,:);
     
-    fileID = fopen(['./random1/outputCCCP', num2str(i),'.txt'],'r');
+    fileID = fopen(['./150nowait/outputCCCP', num2str(i),'.txt'],'r');
     formatSpec = '%f ';
     sizeA = [1 Inf];
     datalist = fscanf(fileID,formatSpec,sizeA);
